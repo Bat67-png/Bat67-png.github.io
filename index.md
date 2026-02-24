@@ -6,7 +6,7 @@
 
 # Assignments
 
-- Assignments will be here
+- [Project1](interactive-scene)
 
 
 [def]: 01-demo
