@@ -1,2 +1,2 @@
 # Bat67-png.github.io
-cs 30
+CS30 Projects
