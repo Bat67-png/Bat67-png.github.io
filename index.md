@@ -2,8 +2,11 @@
 
 # Demos
 
-- I will add demos here
+- [First Day Demo](01-demo)
 
 # Assignments
 
 - Assignments will be here
+
+
+[def]: 01-demo
