@@ -6,11 +6,13 @@
 // - describe what you did to take this project "above and beyond"
 
 
-let g = "down"
+let g = "down";
 let x;
 let y;
 let d = 50;
 let speed = 7;
+let obstacleTime = 1000;
+let nextObstacle = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -20,7 +22,7 @@ function setup() {
 
 function draw() {
   background(220);
-  gman()
+  gman();
 }
 
 function gman() {
@@ -45,11 +47,19 @@ function gman() {
 }
 
 function keyPressed() {
-  if (key === 's') {
+  if (key === 's' && y <= d) {
     g = "down";
   }
-  if (key === 'w') {
+  if (key === 'w' && y >= height - d) {
     g = "up";
+  }
+}
+
+function drawObstacles() {
+  let y = 0;
+  let speed = 10;
+  for (let x = width; x >= 0; x += speed) {
+    rect(x, y, w, h);
   }
 }
 
