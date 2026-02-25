@@ -3,6 +3,7 @@
 # Demos
 
 - [First Day Demo](01-demo)
+- [scope](02-scope)
 
 # Assignments
 
