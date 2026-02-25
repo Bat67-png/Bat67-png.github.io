@@ -7,15 +7,15 @@
 
 
 let g = "down"
-let x = 200;
-let y = 200;
+let x;
+let y;
 let d = 50;
 let speed = 7;
 
 function setup() {
-  createCanvas(400, 400);
-  let x = width/2;
-  let y = height/2;
+  createCanvas(windowWidth, windowHeight);
+  x = width/2;
+  y = height/2;
 }
 
 function draw() {
@@ -26,30 +26,30 @@ function draw() {
 function gman() {
   
 //   creates the gman
-  fill("yellow")
-  circle(x, y, d)
+  fill("yellow");
+  circle(x, y, d);
   
 //   changes gman's gravity
   if (g === "down" && y < height - d/2) {
-    y += speed
+    y += speed;
   }
   if (g === "up" && y > 0 + d/2) {
-    y -= speed
+    y -= speed;
   }
   if (g === "right" && y < height - d/2) {
-    y += speed
+    y += speed;
   }
   if (g === "left" && y > 0 + d/2) {
-    y -= speed
+    y -= speed;
   }
-  }
+}
 
 function keyPressed() {
   if (key === 's') {
-    g = "down"
+    g = "down";
   }
   if (key === 'w') {
-    g = "up"
+    g = "up";
   }
 }
 
