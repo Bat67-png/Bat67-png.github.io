@@ -4,6 +4,7 @@
 
 - [First Day Demo](01-demo)
 - [scope](02-scope)
+- [images](03-images)
 
 # Assignments
 
