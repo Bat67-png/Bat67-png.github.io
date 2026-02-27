@@ -23,15 +23,14 @@ function setup() {
 function draw() {
   background(220);
   gman();
+  drawObstacles();
 }
 
 function gman() {
-  
-//   creates the gman
+  //   creates the gman
   fill("yellow");
   circle(x, y, d);
-  
-//   changes gman's gravity
+  //   changes gman's gravity
   if (g === "down" && y < height - d/2) {
     y += speed;
   }
