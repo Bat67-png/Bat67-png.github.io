@@ -13,24 +13,31 @@ let d = 50;
 let speed = 7;
 let lastObstacle = 0;
 let obstacleChangeTime = 1500;
+let obsx;
+let obsy;
+let rectWidth = 50;
+let rectHeight;
+let obsSpeed = 3;
 
 function setup() {
   createCanvas(500, 500);
   let x = width;
   let y = height;
+  obsx = width - rectWidth
+  obsy = 0
 }
 
 function draw() {
   background(220);
   gman();
-  obstacles1();
+  topObsMaker();
+  topObsMover();
 }
 
+// Creates the G-Man and some code that changes his gravity
 function gman() {
-  //   creates the gman
   fill("yellow");
   circle(x, y, d);
-  //   changes gman's gravity
   if (g === "down" && y < height - d/2) {
     y += speed;
   }
@@ -49,20 +56,23 @@ function keyPressed() {
   }
 }
 
-// Creates new obstacles every 1.5 second
-function obstacles1() {
-  let x = 0;
-  let y = 0;
-  let obstacleWidth = 50;
-  let obstacleHeight = 100;
-  if (millis() >= obstacleChangeTime + lastObstacle) {
-    lastObstacle = millis() + obstacleChangeTime;
-    obstacleWidth = 50;
-    obstacleHeight = random(100, 200);
-    x = width - obstacleWidth;
+// Creates the obstacle
+function topObsMaker() {
+  fill("darkgreen")
+  rect(obsx, obsy, rectWidth, rectHeight)
+}
+// Moves the obstacle and creates a new one after passing
+function topObsMover() {
+  obsx -= obsSpeed
+  if (obsx <= 0) {
+    obsx = width - rectWidth
+    rectHeight = random(50, 150)
   }
-  fill("red");
-  rect(x, y, obstacleWidth, obstacleHeight);
-
+}
+// Some code that makes the obstacle Push the G-Man to the edge
+function obstaclePush() {
+  if (x + d/2 === obsx && y <= rectHeight) {
+      x -= obsSpeed
+      }
 }
 
