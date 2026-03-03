@@ -21,7 +21,7 @@ let botx, botRectHeight;
 let score = 0;
 let scoreDisplay;
 
-let color = "yellow"
+let color = "yellow";
 
 let bx;
 let by;
@@ -91,22 +91,22 @@ function runGame() {
 // Mouse wheel input
 function mouseWheel(event) {
   if (color === "yellow") {
-    color = "orange"
+    color = "orange";
   }
   else if (color === "orange") {
-    color = "red"
+    color = "red";
   }
   else if (color === "red") {
-    color = "purple"
+    color = "purple";
   }
   else if (color === "purple") {
-    color = "blue"
+    color = "blue";
   }
   else if (color === "blue") {
-    color = "green"
+    color = "green";
   }
   else if (color === "green") {
-    color = "yellow"
+    color = "yellow";
   }
 }
 
@@ -126,8 +126,12 @@ function gman() {
 // Gravity change keys
 function keyPressed() {
   if (state === "game") {
-    if (key === 's' && y <= d) g = "down";
-    if (key === 'w' && y >= height - d) g = "up";
+    if (key === 's' && y <= d) {
+      g = "down";
+    }
+    if (key === 'w' && y >= height - d) {
+      g = "up";
+    }
   }
 }
 
