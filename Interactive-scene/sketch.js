@@ -88,6 +88,7 @@ function runGame() {
   }
 }
 
+// Mouse wheel input
 function mouseWheel(event) {
   if (color === "yellow") {
     color = "orange"
@@ -109,6 +110,7 @@ function mouseWheel(event) {
   }
 }
 
+// the g man
 function gman() {
   fill(color);
   circle(x, y, d);
@@ -121,6 +123,7 @@ function gman() {
   }
 }
 
+// Gravity change keys
 function keyPressed() {
   if (state === "game") {
     if (key === 's' && y <= d) g = "down";
@@ -128,8 +131,7 @@ function keyPressed() {
   }
 }
 
-// obstacles
-
+// Obstacles
 function topObsMaker() {
   if (state === "game") {
     fill("darkgreen");
@@ -165,6 +167,7 @@ function botObsMover() {
   }
 }
 
+// The physics of my obstacles
 function obstaclePush() {
   let circleRight = x + d / 2;
   let circleLeft = x - d / 2;
