@@ -14,39 +14,28 @@ function draw() {
     ball.x += ball.dx;
     ball.y += ball.dy;
 
-    if (ball.x - ball.radius > width) {
-      ball.x = -ball.radius;
-    }
-    else if (ball.x + ball.radius < 0) {
-      ball.x = width;
-    }
-    if (ball.y - ball.radius > height) {
-      ball.y = 0;
-    }
-    else if (ball.y + ball.radius < 0) {
-      ball.x = height;
+  }
 
-  //   if (ball.x >= width) {
-  //     ball.x -= ball.dx;
-  //   }
-  //   else if (ball.x <= 0) {
-  //     ball.x += ball.dx;
-  //   }
+  if (ball.x + ball.radius >= width) {
+    ball.x = -ball.x;
+  }
+  else if (ball.x - ball.radius <= 0) {
+    ball.x = ball.x;
+  }
 
-  //   if (ball.y >= height) {
-  //     ball.y -= ball.dx;
-  //   }
-  //   else if (ball.y <= 0) {
-  //     ball.x = height;
-  // }
+  if (ball.y  + ball.radius>= height) {
+    ball.y -= ball.dx;
+  }
+  else if (ball.y - ball.radius <= 0) {
+    ball.x = height;
+  }
 
   //display
   fill(ball.r, ball.g, ball.b);
   circle(ball.x, ball.y, ball.radius*2);
-    // ballPhase();
+  // ballPhase();
 }
-}
-}
+
 
 function ballPhase() {
   
