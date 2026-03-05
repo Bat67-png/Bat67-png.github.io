@@ -5,6 +5,7 @@
 - [First Day Demo](01-demo)
 - [scope](02-scope)
 - [images](03-images)
+- [Ball Array](04 - ball array)
 
 # Assignments
 
