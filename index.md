@@ -11,6 +11,8 @@
 # Assignments
 
 - [Project1](interactive-scene)
+- [Array and Object notation](array-object)
+
 
 
 [def]: 01-demo
