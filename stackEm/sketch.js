@@ -7,9 +7,11 @@
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(700, 700);
 }
 
 function draw() {
   background(220);
+  
+
 }

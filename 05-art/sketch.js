@@ -1,52 +1,54 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// Ball Array Demo
 
-let theTiles = [];
-const THESIZE = 100;
+let ballArray = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-  for (let x = THESIZE/2; x < width; x += THESIZE) {
-    for (let y = THESIZE/2; y < height; y += THESIZE) {
-      let someTile = spawnTile(x, y, THESIZE);
-      theTiles.push(someTile);
-    }
-  }
-
+  noStroke();
 }
 
 function draw() {
   background(220);
-  for (let tile of theTiles) {
-    line(tile.x1, tile.y1, tile.x2, tile.y2);
+
+  for (let ball of ballArray) {
+    //move
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    //teleport if needed
+    if (ball.x - ball.radius > width) {
+      ball.x = -ball.radius;
+    }
+    if (ball.x + ball.radius < 0) {
+      ball.x = width + ball.radius;
+    }
+    if (ball.y - ball.radius > height) {
+      ball.y = -ball.radius;
+    }
+    if (ball.y + ball.radius < 0) {
+      ball.y = height + ball.radius;
+    }
+
+    //display
+    fill(ball.r, ball.g, ball.b);
+    circle(ball.x, ball.y, ball.radius*2);
   }
 }
 
-function spawnTile(x, y, tileSize) {
-  let choice = random(100);
-  let tile;
-  if (choice < 50) {
-    // positive slope
-    tile = {
-      x1: x - tileSize/2,
-      y1: y + tileSize/2,
-      x2: x + tileSize/2,
-      y2: y - tileSize/2,
-    };
-  }
-  else {
-    // negative slope
-    tile = {
-      x1: x - tileSize/2,
-      y1: y - tileSize/2,
-      x2: x + tileSize/2,
-      y2: y + tileSize/2,
-    };
-  }
-  return tile;
+function mousePressed() {
+  spawnBall(mouseX, mouseY);
+}
+
+function spawnBall(_x, _y) {
+  let someBall = {
+    x: _x,
+    y: _y,
+    dx: random(-5, 5),
+    dy: random(-5, 5),
+    radius: random(10, 30),
+    r: random(0, 255),
+    g: random(0, 255),
+    b: random(0, 255),
+  };
+  ballArray.push(someBall);
 }
