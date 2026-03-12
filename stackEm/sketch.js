@@ -83,36 +83,71 @@
 let blockArray = [];
 let w = 100;
 let h = 50;
-let state = "right";
+let state = "blockIsNotPresent";
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(700, 700);
   noStroke();
 }
 
 function draw() {
   background(220);
+  blockMaker();
+  // for (let block of blockArray) {
+  //   //move
+  //   block.x += block.dx;
 
-  for (let block of blockArray) {
+  //   //teleport if needed
+  //   if (block.x + w > width) {
+  //     block.dx = -1*block.dx;
+  //   }
+  //   if (block.x <= 0) {
+  //     block.dx = -1*block.dx;
+  //   }
+
+  //   //display
+  //   fill(block.r, block.g, block.b);
+  //   rect(block.x, block.y, w, h);
+  // }
+}
+
+function blockMaker() {
+  if (state === "blockIsNotPresent") {
+    for (let block of blockArray) {
     //move
-    block.x += block.dx;
-
-    //teleport if needed
-    if (block.x + w > width) {
-      block.x -= block.dx;
-    }
-    if (block.x + w < 0) {
       block.x += block.dx;
-    }
 
-    //display
-    fill(block.r, block.g, block.b);
-    rect(block.x, block.y, w, h);
+      //teleport if needed
+      if (block.x + w > width) {
+        block.dx = -1*block.dx;
+      }
+      if (block.x <= 0) {
+        block.dx = -1*block.dx;
+      }
+
+      //display
+      fill(block.r, block.g, block.b);
+      rect(block.x, block.y, w, h);
+    }
+  }
+  else if (state === "blockIsPresent") {
+    for (let block of blockArray) {
+      fill(block.r, block.g, block.b);
+      rect(block.x, block.y + h, w, h);
+    }
+  }
+}
+
+function keyPressed() {
+  if (key === "q") {
+    spawnblock();
   }
 }
 
 function mousePressed() {
-  spawnblock();
+  if (state === "blockIsNotPresent") {
+    state = "blockIsPresent";
+  }
 }
 
 function spawnblock() {
