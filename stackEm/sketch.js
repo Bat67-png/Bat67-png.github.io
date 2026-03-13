@@ -5,81 +5,6 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-
-// let blockArray = [];
-// let x;
-// let y;
-// let w;
-// let h;
-// let speed = 1;
-// let state = "right";
-
-
-// function setup() {
-//   createCanvas(700, 700);
-//   w = 80;
-//   h = 50;
-//   x = width/2 - w/2;
-//   y = height - 2*h;
-// }
-
-// function draw() {
-//   background(220);
-//   spawnBlock();
-//   // block();
-//   for (let block of blockArray) {
-//     // movement
-//     if (state === "right") {
-//       block.x += speed;
-//     }
-//     else if (state === "left") {
-//       block.x -= speed;
-//     } 
-//     else if (state === "stop") {
-//       block.x += 0;
-//       fill("green");
-//       rect(block.x, block.y, block.w, block.h );
-//       noLoop();
-//     }
-//     fill("black");
-//     rect(block.x, block.y - block.h , block.w, block.h);
-//   }
-// }
-
-// // function block() {
-// //   noStroke();
-// //   fill("black");
-// //   rect(x, y, w, h);
-// //   if (state === "right") {
-// //     x += speed;
-// //   }
-// //   else if (state === "left") {
-// //     x -= speed;
-// //   }
-// //   else if (state === "stop") {
-// //     x += 0;
-// //   }
-// //   console.log(state);
-// // }
-
-// function keyPressed() {
-//   if (key === 's') {
-//     state = "stop";
-//     fill("green");
-//     rect(block.x, block.y - block.h, block.w, block.h);
-//   }
-// }
-
-// function spawnBlock() {
-//   let someBlock = {
-//     x: width/2 - w/2,
-//     y: height - 2*h,
-//     w: random(50, 80),
-//     h: random(40, 50)
-//   };
-//   blockArray.push(someBlock);
-// }
-
 let blockArray = [];
 let w = 100;
 let h = 50;
@@ -93,22 +18,29 @@ function setup() {
 function draw() {
   background(220);
   blockMaker();
-  // for (let block of blockArray) {
-  //   //move
-  //   block.x += block.dx;
+  nextblocks();
+}
 
-  //   //teleport if needed
-  //   if (block.x + w > width) {
-  //     block.dx = -1*block.dx;
-  //   }
-  //   if (block.x <= 0) {
-  //     block.dx = -1*block.dx;
-  //   }
+function nextblocks() {
+  if (state === "blockIsPresent") {
+    let blockClone = structuredClone(blockArray);
+    for (let b of blockClone) {
+    //move
+      b.x += b.dx;
 
-  //   //display
-  //   fill(block.r, block.g, block.b);
-  //   rect(block.x, block.y, w, h);
-  // }
+      //teleport if needed
+      if (b.x + w > width) {
+        b.dx = -1*b.dx;
+      }
+      if (b.x <= 0) {
+        b.dx = -1*b.dx;
+      }
+
+      //display
+      fill(b.r, b.g, b.b);
+      rect(b.x, b.y - h, w, h);
+    }
+  }
 }
 
 function blockMaker() {
