@@ -7,6 +7,7 @@
 - [images](03-images)
 - [Ball Array](04-ball-array)
 - [generative art](05-art)
+- [Perlin noise](06-perlin)
 
 # Assignments
 

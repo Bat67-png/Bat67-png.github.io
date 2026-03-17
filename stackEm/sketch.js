@@ -63,7 +63,7 @@ function blockMaker() {
     }
   }
   else if (state === "blockIsPresent") {
-    for (let block of blockArray) {
+    for (let block of structuredClone(blockArray)) {
       fill(block.r, block.g, block.b);
       rect(block.x, block.y + h, w, h);
     }
