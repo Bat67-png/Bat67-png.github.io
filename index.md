@@ -8,6 +8,7 @@
 - [Ball Array](04-ball-array)
 - [generative art](05-art)
 - [Perlin noise](06-perlin)
+- [2D grid](07-grid)
 
 # Assignments
 
