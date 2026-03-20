@@ -9,6 +9,7 @@
 - [generative art](05-art)
 - [Perlin noise](06-perlin)
 - [2D grid](07-grid)
+- [Rectangular Grid](08-rect-grid)
 
 # Assignments
 
