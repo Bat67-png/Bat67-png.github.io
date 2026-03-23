@@ -1,7 +1,6 @@
 # My CS30 Stuff
 
 # Demos
-
 - [First Day Demo](01-demo)
 - [scope](02-scope)
 - [images](03-images)
@@ -10,6 +9,7 @@
 - [Perlin noise](06-perlin)
 - [2D grid](07-grid)
 - [Rectangular Grid](08-rect-grid)
+- [Game of life](09-life)
 
 # Assignments
 
