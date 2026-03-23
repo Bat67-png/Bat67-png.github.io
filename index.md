@@ -15,6 +15,7 @@
 
 - [Project1](interactive-scene)
 - [Array and Object notation](stackEm)
+- [2D grid](grid-based-game)
 
 
 

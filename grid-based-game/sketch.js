@@ -10,7 +10,7 @@
 
 //use this to randomize grid
 let theGrid;
-const SQUARE_DIMENSION = 10;
+const SQUARE_DIMENSION = 8;
 let cellSize;
 
 function setup() {
