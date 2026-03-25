@@ -1,6 +1,7 @@
 # My CS30 Stuff
 
 # Demos
+- [deb]{00-debug}
 - [First Day Demo](01-demo)
 - [scope](02-scope)
 - [images](03-images)
@@ -10,6 +11,7 @@
 - [2D grid](07-grid)
 - [Rectangular Grid](08-rect-grid)
 - [Game of life](09-life)
+- [Character in Grid](10-character)
 
 # Assignments
 

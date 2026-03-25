@@ -13,6 +13,14 @@ const BOARD_DIMENSION = 8;
 const LIVE_CELL = 1;
 const DEAD_CELL = 0;
 let cellSize;
+let theBlackKing = {
+  x: 0,
+  y: 0,
+};
+
+function preload() {
+  blackKingImg = loadImage("black.king.png");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -23,6 +31,8 @@ function setup() {
     cellSize = width/BOARD_DIMENSION;
   }
   theGrid = generateTHeBoard(BOARD_DIMENSION, BOARD_DIMENSION);
+
+  grid[theBlackKing.y][theBlackKing.x];
 }
 
 function draw() {
