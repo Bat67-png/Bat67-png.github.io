@@ -4,18 +4,23 @@
 //
 // Extra for Experts:
 // 
-
-let theGrid;
-const Pawn = 1;
+const EMPTY = 0;
+const PAWN = 1;
 const WHITE_KING = 2;
 const BLACK_KING = 3;
 const BOARD_DIMENSION = 8;
-const LIVE_CELL = 1;
-const DEAD_CELL = 0;
+let theGrid;
+let cols;
+let rows;
 let cellSize;
+let blackKingImg;
 let theBlackKing = {
-  x: 0,
+  x: 3,
   y: 0,
+};
+let theWhiteKing = {
+  x: 3,
+  y: 2
 };
 
 function preload() {
@@ -32,12 +37,24 @@ function setup() {
   }
   theGrid = generateTHeBoard(BOARD_DIMENSION, BOARD_DIMENSION);
 
-  grid[theBlackKing.y][theBlackKing.x];
+  theGrid[theBlackKing.y][theBlackKing.x] = BLACK_KING;
 }
 
 function draw() {
   background(220);
-  chessBoard();
+  displayPieces();
+  // chessBoard();
+}
+
+function displayPieces() {
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (theGrid[y][x] === BLACK_KING) {
+        // fill("black");
+        image(blackKingImg, x * cellSize, y * cellSize, cellSize, cellSize);
+      }
+    }
+  }
 }
 
 function mousePressed() {
@@ -49,29 +66,21 @@ function mousePressed() {
   console.log(theGrid);
 }
 
-// function toggleCell(x, y) {
 
-// }
-
-
+// Creates the array board which I will use to put my chess pieces in
 function generateTHeBoard(cols, rows) {
   let newGrid = [];
   for (let y = 0; y < rows; y++) {
     newGrid.push([]);
     for (let x = 0; x < cols; x++) {
-      if (y === 1 || 6) {
-        newGrid[y].push(Pawn);
-      }
-      else {
-        newGrid[y].push(0);
-      }
-      
+      newGrid[y].push(0);
     }
   }
   return newGrid;
 }
 
 
+// Creates the visual board 
 function chessBoard() {
   let isWhite = true;
   for (let x = 0; x < BOARD_DIMENSION; x++) {
