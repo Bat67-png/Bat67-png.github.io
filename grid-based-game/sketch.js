@@ -15,7 +15,7 @@ let rows;
 let cellSize;
 let blackKingImg;
 let theBlackKing = {
-  x: 3,
+  x: 7,
   y: 0,
 };
 let theWhiteKing = {
@@ -35,6 +35,8 @@ function setup() {
   else {
     cellSize = width/BOARD_DIMENSION;
   }
+  rows = 8;
+  cols = 8;
   theGrid = generateTHeBoard(BOARD_DIMENSION, BOARD_DIMENSION);
 
   theGrid[theBlackKing.y][theBlackKing.x] = BLACK_KING;
@@ -42,16 +44,14 @@ function setup() {
 
 function draw() {
   background(220);
-  displayPieces();
-  // chessBoard();
+  chessBoard();
 }
 
 function displayPieces() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       if (theGrid[y][x] === BLACK_KING) {
-        // fill("black");
-        image(blackKingImg, x * cellSize, y * cellSize, cellSize, cellSize);
+        image(blackKingImg, x*cellSize, y*cellSize, cellSize, cellSize);
       }
     }
   }
@@ -60,6 +60,8 @@ function displayPieces() {
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
+  
+  
 
   console.log(x, y);
 
@@ -88,7 +90,7 @@ function chessBoard() {
       if (isWhite) {
         fill("white");
       }
-      else {
+      if (!isWhite) {
         fill("black");
       }
       square(x*cellSize, y*cellSize, cellSize);
@@ -96,4 +98,5 @@ function chessBoard() {
     }
     isWhite = !isWhite;
   }
-}
+  displayPieces();
+} 
