@@ -8,7 +8,10 @@ const EMPTY = 0;
 const BLACK_PAWN = 1;
 const WHITE_PAWN = 2;
 const BLACK_KING = 3;
+const WHITE_KNIGHT = 4; 
+const NEXT_MOVE = 5;
 const BOARD_DIMENSION = 8;
+let chessMoveGrid;
 let theGrid;
 let cols;
 let rows;
@@ -19,65 +22,66 @@ let blackKingImg;
 let blackPawnImg;
 let whitePawnImg;
 let puzzle;
+let whiteKnightImg;
 
 // pieces coordinates
-// let theBlackKing = {
-//   x: 7,
-//   y: 0,
-// };
-// let theWhiteKing = {
-//   x: 3,
-//   y: 2
-// };
-// let blackPawn1 = {
-//   x: 7,
-//   y: 1
-// };
+let theBlackKing = {
+  x: 7,
+  y: 0,
+};
+let theWhiteKing = {
+  x: 3,
+  y: 2
+};
+let blackPawn1 = {
+  x: 7,
+  y: 1
+};
 
-// let blackPawn2 = {
-//   x: 6,
-//   y: 1
-// };
+let blackPawn2 = {
+  x: 6,
+  y: 1
+};
 
-// let blackPawn3 = {
-//   x: 2,
-//   y: 1
-// };
+let blackPawn3 = {
+  x: 2,
+  y: 2
+};
 
-// let blackPawn4 = {
-//   x: 1,
-//   y: 1
-// };
+let blackPawn4 = {
+  x: 1,
+  y: 1
+};
 
-// let blackPawn5 = {
-//   x: 0,
-//   y: 2
-// };
+let blackPawn5 = {
+  x: 0,
+  y: 2
+};
 
-// let whitePawn1 = {
-//   x: 6,
-//   y: 6
-// };
+let whitePawn1 = {
+  x: 6,
+  y: 6
+};
 
-// let whitePawn2 = {
-//   x: 5,
-//   y: 6
-// };
+let whitePawn2 = {
+  x: 5,
+  y: 6
+};
 
-// let whitePawn3 = {
-//   x: 2,
-//   y: 6
-// };
+let whitePawn3 = {
+  x: 2,
+  y: 6
+};
 
-// let whitePawn4 = {
-//   x: 0,
-//   y: 6
-// };
+let whitePawn4 = {
+  x: 0,
+  y: 6
+};
 
-// let whitePawn5 = {
-//   x: 2,
-//   y: 5
-// };
+let whitePawn5 = {
+  x: 2,
+  y: 5
+};
 
 
 function preload() {
@@ -85,6 +89,7 @@ function preload() {
   blackPawnImg = loadImage("black.pawn.svg");
   whitePawnImg = loadImage("white.pawn.svg");
   puzzle = loadStrings("assets/1.puzzle");
+  whiteKnightImg = loadImage("white.knight.svg");
 }
 
 function setup() {
@@ -99,26 +104,28 @@ function setup() {
   rows = 8;
   cols = 8;
   theGrid = generateTHeBoard(BOARD_DIMENSION, BOARD_DIMENSION);
+  chessMoveGrid = structuredClone(theGrid);
 
-  // theGrid[theBlackKing.y][theBlackKing.x] = BLACK_KING;
-  // theGrid[blackPawn1.y][blackPawn1.x] = BLACK_PAWN;
-  // theGrid[blackPawn2.y][blackPawn2.x] = BLACK_PAWN;
-  // theGrid[blackPawn3.y][blackPawn3.x] = BLACK_PAWN;
-  // theGrid[blackPawn4.y][blackPawn4.x] = BLACK_PAWN;
-  // theGrid[blackPawn5.y][blackPawn5.x] = BLACK_PAWN;
+  theGrid[theBlackKing.y][theBlackKing.x] = BLACK_KING;
+  theGrid[blackPawn1.y][blackPawn1.x] = BLACK_PAWN;
+  theGrid[blackPawn2.y][blackPawn2.x] = BLACK_PAWN;
+  theGrid[blackPawn3.y][blackPawn3.x] = BLACK_PAWN;
+  theGrid[blackPawn4.y][blackPawn4.x] = BLACK_PAWN;
+  theGrid[blackPawn5.y][blackPawn5.x] = BLACK_PAWN;
 
-  // theGrid[whitePawn1.y][whitePawn1.x] = WHITE_PAWN;
-  // theGrid[whitePawn2.y][whitePawn2.x] = WHITE_PAWN;
-  // theGrid[whitePawn3.y][whitePawn3.x] = WHITE_PAWN;
-  // theGrid[whitePawn4.y][whitePawn4.x] = WHITE_PAWN;
-  // theGrid[whitePawn5.y][whitePawn5.x] = WHITE_PAWN;
+  theGrid[whitePawn1.y][whitePawn1.x] = WHITE_PAWN;
+  theGrid[whitePawn2.y][whitePawn2.x] = WHITE_PAWN;
+  theGrid[whitePawn3.y][whitePawn3.x] = WHITE_PAWN;
+  theGrid[whitePawn4.y][whitePawn4.x] = WHITE_PAWN;
+  theGrid[whitePawn5.y][whitePawn5.x] = WHITE_PAWN;
 
-
+  theGrid[2][3] = WHITE_KNIGHT;
 }
 
 function draw() {
   background(220);
   chessBoard();
+  chessMoves();
 }
 
 // Display the chess pieces on the board
@@ -134,6 +141,31 @@ function displayPieces() {
       if (theGrid[y][x] === WHITE_PAWN) {
         image(whitePawnImg, x*cellSize, y*cellSize, cellSize, cellSize);
       }
+      if (theGrid[y][x] === WHITE_KNIGHT) {
+        image(whiteKnightImg, x*cellSize, y*cellSize, cellSize, cellSize);
+      }
+    }
+  }
+}
+
+function toggleSquare() {
+  for (let y = 0; y < BOARD_DIMENSION; y++) {
+    for (let x = 0; x < BOARD_DIMENSION; x++) {
+      if (chessMoveGrid[y][x] === NEXT_MOVE) {
+        noStroke();
+        fill("green");
+        circle(x*cellSize, y*cellSize, cellSize/2);
+      }
+    }
+  }
+}
+
+function chessMoves() {
+  for (let y = 0; y < BOARD_DIMENSION; y++) {
+    for (let x = 0; x < BOARD_DIMENSION; x++) {
+      if (chessMoveGrid[y][x] === WHITE_KNIGHT) {
+        chessMoveGrid[y + 1][x + 2] = NEXT_MOVE;
+      }
     }
   }
 }
@@ -141,14 +173,27 @@ function displayPieces() {
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
-  
-  
+
+  chessMoves();
+  toggleSquare();
 
   console.log(x, y);
-
+  console.log(chessMoveGrid);
   console.log(theGrid);
 }
 
+// determines the next move of the pieces after being pressed
+function chessMovements(x, y) {
+  if (x >= 0 && x < cols && y >= 0 && y < rows) {
+
+    if (theGridgrid[y][x] === WHITE_KNIGHT) {
+      grid[y - 1][x + 2] = NEXT_MOVE;
+    }
+    else if (grid[y][x] === 0) {
+      grid[y][x] = 1;
+    }
+  }
+}
 
 // Creates the array board which I will use to put my chess pieces in
 function generateTHeBoard(cols, rows) {
