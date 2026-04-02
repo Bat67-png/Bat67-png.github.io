@@ -120,6 +120,7 @@ function setup() {
   theGrid[whitePawn5.y][whitePawn5.x] = WHITE_PAWN;
 
   theGrid[2][3] = WHITE_KNIGHT;
+  chessMovements();
 }
 
 function draw() {
@@ -154,7 +155,7 @@ function toggleSquare() {
       if (chessMoveGrid[y][x] === NEXT_MOVE) {
         noStroke();
         fill("green");
-        circle(x*cellSize, y*cellSize, cellSize/2);
+        circle(x*cellSize + x*cellSize/8, y*cellSize + y*cellSize/8, cellSize/2);
       }
     }
   }
@@ -173,19 +174,20 @@ function chessMoves() {
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
-
-  chessMoves();
-  toggleSquare();
-
-  console.log(x, y);
-  console.log(chessMoveGrid);
-  console.log(theGrid);
+  chessMoveGrid = structuredClone(theGrid);
+  for (let y = 0; y < BOARD_DIMENSION; y++) {
+    for (let x = 0; x < BOARD_DIMENSION; x++) {
+      if (chessMoveGrid[y][x] === WHITE_KNIGHT) {
+        chessMoveGrid[y + 1][x + 1] = NEXT_MOVE;
+      }
+    }
+  }
+  
 }
 
 // determines the next move of the pieces after being pressed
 function chessMovements(x, y) {
   if (x >= 0 && x < cols && y >= 0 && y < rows) {
-
     if (theGridgrid[y][x] === WHITE_KNIGHT) {
       grid[y - 1][x + 2] = NEXT_MOVE;
     }

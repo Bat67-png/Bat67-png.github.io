@@ -1,32 +1,17 @@
-// Character In Grid Demo
+// Rectangular Grid 2d Array Demo
 
-const CELL_SIZE = 50;
-const OPEN_TILE = 0;
-const IMPASSIBLE = 1;
-const PLAYER = 9;
+const CELL_SIZE = 100;
 let grid;
 let rows;
 let cols;
-let thePlayer = {
-  x: 0,
-  y: 0,
-};
-let grassImg;
-let pathImg;
-
-function preload() {
-  grassImg = loadImage("grass.png");
-  pathImg = loadImage("paving.png");
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  rows = Math.floor(height/CELL_SIZE);
-  cols = Math.floor(width/CELL_SIZE);
-  grid = generateRandomGrid(cols, rows);
+  rows = 8;
+  cols = 8;
+  grid = generateEmptyGrid(rows, cols);
 
-  //add player to grid
-  grid[thePlayer.y][thePlayer.x] = PLAYER;
+  grid[6][4] =  2;
 }
 
 function draw() {
@@ -34,110 +19,81 @@ function draw() {
   displayGrid();
 }
 
+function displayGrid() {
+  for (let y = 0; y <  rows; y ++) {
+    for (let x = 0; x < cols; x++) {
+      if (grid[y][x] === 0) {
+        fill("white");
+      }
+      if (grid[y][x] === 1) {
+        fill("black");
+      }
+      if (grid[y][x] === 2) {
+        fill("green");
+      }
+      square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
+    }
+  }
+}
+
 function mousePressed() {
   let x = Math.floor(mouseX/CELL_SIZE);
   let y = Math.floor(mouseY/CELL_SIZE);
 
-  //self
   toggleCell(x, y);
+
+  // neighbors
+}
+
+function toggleCell(x, y) {
+  //make sure the cell actually exists!
+  if (x >= 0 && x < cols && y >= 0 && y < rows && grid[y][x] === 2 && grid[y] === 6) {
+    grid[y - 1][x] = 1;
+    grid[y - 2][x] = 1;
+  }
+  else {
+    grid[y - 1][x] = 1;
+  }
+  if (x >= 0 && x < cols && y >= 0 && y < rows && grid[y][x] === 1) {
+    grid[y][x] = 2;
+    grid[y + 1][x] = 0;
+    grid[y + 2][x] = 0;
+    grid[y - 1][x] = 0;
+  }
 }
 
 function keyPressed() {
   if (key === "r") {
-    grid = generateRandomGrid(cols, rows);
-    grid[thePlayer.y][thePlayer.x] = PLAYER;
+    grid = generateRandomGrid();
   }
   if (key === "e") {
-    grid = generateEmptyGrid(cols, rows);
-    grid[thePlayer.y][thePlayer.x] = PLAYER;
-  }
-  if (key === "s") {
-    movePlayer(thePlayer.x, thePlayer.y + 1);
-  }
-  if (key === "w") {
-    movePlayer(thePlayer.x, thePlayer.y - 1);
-  }
-  if (key === "d") {
-    movePlayer(thePlayer.x + 1, thePlayer.y);
-  }
-  if (key === "a") {
-    movePlayer(thePlayer.x - 1, thePlayer.y);
-  }
-}
-
-function movePlayer(x, y) {
-  if (x >= 0 && x < cols && y >= 0 && y < rows && grid[y][x] === OPEN_TILE) {
-    //previous position
-    let oldX = thePlayer.x;
-    let oldY = thePlayer.y;
-
-    //moving the player to new location
-    thePlayer.x = x;
-    thePlayer.y = y;
-  
-    //adding player to grid
-    grid[thePlayer.y][thePlayer.x] = PLAYER;
-
-    //reset the old location to be an open tile
-    grid[oldY][oldX] = OPEN_TILE;
-  }
-}
-
-
-function toggleCell(x, y) {
-  //make sure the cell actually exists!
-  if (x >= 0 && x < cols && y >= 0 && y < rows) {
-    if (grid[y][x] === IMPASSIBLE) {
-      grid[y][x] = OPEN_TILE;
-    }
-    else if (grid[y][x] === OPEN_TILE) {
-      grid[y][x] = IMPASSIBLE;
-    }
-  }
-}
-
-function displayGrid() {
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      if (grid[y][x] === OPEN_TILE) {
-        // fill("white");
-        image(pathImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
-      }
-      if (grid[y][x] === IMPASSIBLE) {
-        // fill("black");
-        image(grassImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
-      }
-      if (grid[y][x] === PLAYER) {
-        fill("red");
-        square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
-      }
-    }
+    grid = generateEmptyGrid();
   }
 }
 
 function generateRandomGrid(cols, rows) {
-  let newGrid = [];
+  let grid = [];
   for (let y = 0; y < rows; y++) {
-    newGrid.push([]);
+    grid.push([]);
     for (let x = 0; x < cols; x++) {
       if (random(100) < 50) {
-        newGrid[y].push(IMPASSIBLE);
+        grid[y].push(1);
       }
       else {
-        newGrid[y].push(OPEN_TILE);
+        grid[y].push(0);
       }
     }
   }
-  return newGrid;
+  return grid;
 }
 
-function generateEmptyGrid(cols, rows) {
-  let newGrid = [];
+function generateEmptyGrid() {
+  let grid = [];
   for (let y = 0; y < rows; y++) {
-    newGrid.push([]);
+    grid.push([]);
     for (let x = 0; x < cols; x++) {
-      newGrid[y].push(OPEN_TILE);
+      grid[y].push(0);
     }
   }
-  return newGrid;
+  return grid;
 }
