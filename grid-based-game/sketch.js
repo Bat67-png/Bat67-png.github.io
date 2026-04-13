@@ -8,14 +8,16 @@
 
 const EMPTY = "0";
 const BOARD_DIMENSION = 8;
-let state = "board"
+let state = "board";
 let theGrid;
 let cols;
 let rows;
 let cellSize;
 let puzzle;
 let board;
-let selected = null
+let movecheck;
+let selected = null;
+let validMove = true;
 
 // White pieces
 const WHITE_PAWN = "2";
@@ -66,6 +68,7 @@ function preload() {
   // Puzzle and the main chess board
   puzzle = loadStrings("assets/1.puzzle");
   board = loadStrings("assets/2.board");
+  movecheck = loadStrings("assets/3.pieces");
 }
 
 function setup() {
@@ -84,16 +87,19 @@ function setup() {
 function draw() {
   background(220);
   chessBoard();
+  winOrLose();
+}
 
-  // Function that shows whether you got the puzzle right or wrong
+// Function that shows whether you got the puzzle right or wrong
+function winOrLose() {
   if (state === "win") {
-    fill("Darkblue")
+    fill("Darkblue");
     textAlign(CENTER, CENTER);
     textSize(100);
     text('You won!', width/2, height/2);
   }
   if (state === "lose") {
-    fill("Darkblue")
+    fill("Darkblue");
     textAlign(CENTER, CENTER);
     textSize(100);
     text('Try again!', width/2, height/2);
@@ -110,16 +116,31 @@ function mousePressed() {
       selected = {x: x, y: y};
     }
   }
-  else {
+  else if (selected !== null && validMove) {
     // The movement of the selected piece
     let piece = theGrid[selected.y][selected.x];
+
+    // prevents the pieces from disappearing after being clicked multiple times
+    if (theGrid[selected.y][selected.x] !== theGrid[y][x]) { 
+      theGrid[selected.y][selected.x] = EMPTY;        
+    }
+
+    // if (theGrid[selected.y][selected.x] === WHITE_KING && 
+    //   theGrid[y][x] === theGrid[selected.y + 1][selected.x + 1] && 
+    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x + 1] &&
+    //   theGrid[y][x] === theGrid[selected.y][selected.x + 1] &&
+    //   theGrid[y][x] === theGrid[selected.y + 1][selected.x] &&
+    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x] &&
+    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x - 1] &&
+    //   theGrid[y][x] === theGrid[selected.y][selected.x - 1] &&
+    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x - 1]) {
+    //   theGrid[y][x] = piece;
+    // }
     theGrid[y][x] = piece;
-    theGrid[selected.y][selected.x] = EMPTY;
+    
     selected = null;
     puzzleOver();
   }
-
-
 }
 
 // Displays the chess pieces on the board
@@ -179,12 +200,14 @@ function keyPressed() {
   }
   if (key === "b") {
     theGrid = loadPuzzle(board);
-    state = "board"
+    state = "board";
   }
   if (key === "w") {
-    state = "win"
+    state = "win";
   }
-
+  if (key === "t") {
+    theGrid = loadPuzzle(movecheck);
+  }
 }
 
 // Function that uses the external assets to create the chess board
@@ -229,10 +252,10 @@ function chessBoard() {
 function puzzleOver() {
   if (state === "puzzle") {
     if (theGrid[4][2] === WHITE_KNIGHT) {
-      state = "win"
+      state = "win";
     }
     else {
-      state = "lose"
+      state = "lose";
     }
   }
 }

@@ -1,6 +1,9 @@
 html, body {
-  margin: 0;
-  padding: 0;
+  background-color: darkgray;
+  /* width: 300px; */
+  /* border: 15px solid green; */
+  padding: 70px;
+  margin: 70px;
 }
 
 canvas {
