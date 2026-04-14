@@ -12,6 +12,8 @@
 - [Rectangular Grid](08-rect-grid)
 - [Game of life](09-life)
 - [Character in Grid](10-character)
+- [platformer](11-platform)
+- [Walker OOP](12-walker)
 
 # Assignments
 
