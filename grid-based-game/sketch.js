@@ -1,6 +1,6 @@
 // Chess puzzle
 // Bat-Erdene Lkhagvasuren
-// 2026-04-12
+// 2026-04-14
 //
 // Extra for Experts:
 // Created a click based movement system 
@@ -120,22 +120,11 @@ function mousePressed() {
     // The movement of the selected piece
     let piece = theGrid[selected.y][selected.x];
 
-    // prevents the pieces from disappearing after being clicked multiple times
+    // Prevents the pieces from disappearing after being clicked on multiple times
     if (theGrid[selected.y][selected.x] !== theGrid[y][x]) { 
       theGrid[selected.y][selected.x] = EMPTY;        
     }
 
-    // if (theGrid[selected.y][selected.x] === WHITE_KING && 
-    //   theGrid[y][x] === theGrid[selected.y + 1][selected.x + 1] && 
-    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x + 1] &&
-    //   theGrid[y][x] === theGrid[selected.y][selected.x + 1] &&
-    //   theGrid[y][x] === theGrid[selected.y + 1][selected.x] &&
-    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x] &&
-    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x - 1] &&
-    //   theGrid[y][x] === theGrid[selected.y][selected.x - 1] &&
-    //   theGrid[y][x] === theGrid[selected.y - 1][selected.x - 1]) {
-    //   theGrid[y][x] = piece;
-    // }
     theGrid[y][x] = piece;
     
     selected = null;
@@ -146,7 +135,6 @@ function mousePressed() {
 // Displays the chess pieces on the board
 function displayPieces() {
   if (state === "puzzle" || state === "board") {
-
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         // Black pieces
@@ -226,7 +214,7 @@ function loadPuzzle(thePuzzle) {
   return newGrid;
 }
 
-// Creates the visual board 
+// Creates the visual board where the pieces will be placed
 function chessBoard() {
   if (state === "board" || state === "puzzle") {
     let isWhite = true;
@@ -248,7 +236,7 @@ function chessBoard() {
   }
 }
 
-// Function that ends the puzzle after making a move in the puzzle
+// Function that ends the puzzle after making a move only for the puzzle
 function puzzleOver() {
   if (state === "puzzle") {
     if (theGrid[4][2] === WHITE_KNIGHT) {
