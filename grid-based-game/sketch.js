@@ -49,7 +49,7 @@ let whiteRookImg;
 let whiteBishopImg;
 let whiteQueenImg;
 
-// Preloads all the pictures and the puzzle
+// Preloads all the pictures and the puzzle from an external asset
 function preload() {
   // Chess pieces
   blackKingImg = loadImage("assets/black.king.svg");
