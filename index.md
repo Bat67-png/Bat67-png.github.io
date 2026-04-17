@@ -15,6 +15,7 @@
 - [platformer](11-platform)
 - [Walker OOP](12-walker)
 - [Fireworks OOP](13-fireworks)
+- [Ball Collision OOP](14-ball-oop)
 
 # Assignments
 

@@ -1,4 +1,4 @@
-// Ball Collision OOP Demo
+// Ball Collision OOP demo
 
 class Ball {
   constructor(x, y) {
@@ -22,22 +22,23 @@ class Ball {
     this.x += this.dx;
     this.y += this.dy;
 
-    //check top/bottom for bounce
+    // check top and bottom
     if (this.y - this.radius < 0 || this.y + this.radius > height) {
       this.dy *= -1;
     }
 
-    //check left/right for bounce
+    // check left and right
     if (this.x - this.radius < 0 || this.x + this.radius > width) {
       this.dx *= -1;
     }
   }
 
+
   bounceOff(otherBall) {
-    let radiiSum = this.radius + otherBall.radius;
+    let radiSum = this.radius + otherBall.radius;
     let distanceApart = dist(this.x, this.y, otherBall.x, otherBall.y);
-    if (radiiSum > distanceApart) {
-      //hitting each other
+    if (radiSum > distanceApart) {
+      // hitting each other
       let tempX = this.dx;
       let tempY = this.dy;
 
@@ -60,14 +61,16 @@ function draw() {
   background(220);
 
   for (let ball of ballArray) {
-    ball.move();
+    ball.display();
+    
     for (let otherBall of ballArray) {
-      //avoid detecting hitting self
+      // avoid detecting hitting self
       if (ball !== otherBall) {
         ball.bounceOff(otherBall);
       }
     }
-    ball.display();
+
+    ball.move();
   }
 }
 
