@@ -14,7 +14,6 @@ function draw() {
   background(220);
 }
 
-
 class Vehicle {
   constructor(type, name) {
     this.type = type;
@@ -30,12 +29,13 @@ class Vehicle {
   }
 }
 
+
 class Car extends Vehicle {
   constructor(name) {
-    super("car", name);
+    super("airplane", name);
   }
 
   getName() {
-    return "This is a car called " + super.getName();
+    return "This is a a car called " + super.getName();
   }
 }
