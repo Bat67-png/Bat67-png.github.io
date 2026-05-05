@@ -18,6 +18,7 @@
 - [Ball Collision OOP](14-ball-oop)
 - [Connected nodes](15-nodes)
 - [OOP Inheritance](16-inheritance)
+- [Collide 2D demo](17-collide)
 
 # Assignments
 
