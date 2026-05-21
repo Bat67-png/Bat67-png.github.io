@@ -19,6 +19,7 @@
 - [Connected nodes](15-nodes)
 - [OOP Inheritance](16-inheritance)
 - [Collide 2D demo](17-collide)
+- [Recursive circles](18-recursive)
 
 # Assignments
 
