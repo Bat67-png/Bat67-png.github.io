@@ -17,5 +17,6 @@ function drawCircle(x, radius) {
   if (radius > 50) {
     drawCircle(x - radius/2, radius/2);
     drawCircle(x + radius/2, radius/2);
+    drawCircle()
   }
 }
